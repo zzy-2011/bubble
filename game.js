@@ -42,7 +42,7 @@
     while (st.length) { const [y, x] = st.pop(); for (const [nr, nc] of neighbors(y, x)) { const i = rc(nr, nc); if (!seen.has(i) && grid[i] === color) { seen.add(i); grp.push([nr, nc]); st.push([nr, nc]); } } }
     if (grp.length >= 3) { grp.forEach(([y, x]) => grid[rc(y, x)] = -1); score += grp.length * 10; scoreEl.textContent = score; dropFloaters(); }
     if (grid.every(v => v === -1)) { level++; levelEl.textContent = level; for (let rr = 0; rr < 5; rr++) for (let cc = 0; cc < COLS; cc++) grid[rc(rr, cc)] = Math.floor(Math.random() * COLORS.length); }
-    if (over || grid.slice(ROWS - 2).some(v => v !== -1)) { over = true; ovTitle.textContent = '游戏结束'; ovSub.textContent = '得分 ' + score; overlay.classList.remove('hidden'); }
+    if (over || grid.slice((ROWS - 2) * COLS).some(v => v !== -1)) { over = true; ovTitle.textContent = '游戏结束'; ovSub.textContent = '得分 ' + score; overlay.classList.remove('hidden'); }
   }
   function dropFloaters() {
     const seen = new Set(); const stk = [];
